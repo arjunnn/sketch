@@ -2,6 +2,8 @@
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  ctx.fillStyle = 'white'
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.strokeStyle = '#00000';
   ctx.lineWidth = 20;
   ctx.lineJoin = 'round';
@@ -32,6 +34,8 @@
 //     direction = !direction;
 //   }
 //   ctx.lineWidth++;
+  canvas.addEventListener('touchmove', draw);
+  canvas.addEventListener('touchstart', draw);
 
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mousedown', (e) => {
@@ -46,9 +50,7 @@
   var palette = document.getElementById("palette");
   for (var i = 0; i < colours.length; i++) {
       var colourOption = document.createElement("li");
-      console.log(colours[i]);
       colourOption.style.backgroundColor = `${colours[i]}`;
-    //   colourOption.style.backgroundImage = "url('https://placehold.it/50x50')";
       colourOption.classList.add("palette-colour");
       colourOption.setAttribute('data-colour', colours[i])
       palette.appendChild(colourOption);

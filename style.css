@@ -3,7 +3,10 @@
   }
 
   #palette {
-        position: fixed;
+        position: relative;
+        margin-bottom: 0;
+        /*float: top;*/
+        display: inline-block;
   }
   ul > li {
       display: inline-block;
@@ -17,4 +20,10 @@
       box-shadow: (20,40,10,3);
       margin: 5px;
       cursor: pointer;
+  }
+  canvas {
+    border: 1px solid black;
+  }
+  ul {
+    /*padding-bottom: 0;*/
   }
