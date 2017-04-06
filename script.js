@@ -107,3 +107,8 @@
 })
 canvas.addEventListener("touchmove", draw) // = mousemove
 canvas.addEventListener("touchend", function() {isDrawing = false}) // = mouseup
+
+function saveImage() {
+  var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  document.querySelector("a").setAttribute('href', img);
+}

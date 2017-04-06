@@ -1,5 +1,6 @@
   html, body {
     margin:0;
+    background-color: lightcoral;
   }
 
   #palette {
@@ -49,3 +50,21 @@
     position: relative;
     border-radius: 50%;
   }
+a {
+  display: inline;
+  top: -65px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  background-color: white;
+  text-transform: uppercase;
+  font-family: monospace;
+  color: black;
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+  background-color: blue;
+}
+#widthSelector {
+  display: inline-block;
+}
