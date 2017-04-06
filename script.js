@@ -59,6 +59,7 @@
       ctx.strokeStyle = $(this).data('colour');
   })
 
+body.addEventListener("touchmove", function(e) {e.preventDefault()})
 
  canvas.addEventListener("touchstart", function(e) { // = mousedown
     touch = true
