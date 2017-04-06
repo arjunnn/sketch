@@ -18,7 +18,7 @@
   function draw(e) {
     if(!isDrawing) return;
     // console.log(e);
-    ctx.strokeStyle = `hsl(${hue}, 100%), 50%)`;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -59,7 +59,7 @@
       ctx.strokeStyle = $(this).data('colour');
   })
 
-body.addEventListener("touchmove", function(e) {e.preventDefault()})
+document.getElementsByTagName("body").addEventListener("touchmove", function(e) {e.preventDefault()})
 
  canvas.addEventListener("touchstart", function(e) { // = mousedown
     touch = true
