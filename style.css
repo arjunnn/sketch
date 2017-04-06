@@ -21,6 +21,11 @@
       margin: 5px;
       cursor: pointer;
   }
+
+  .palette-colour:last-child {
+    background-color: black;
+    background-image: url("beachball.jpg");
+  }
   canvas {
     border: 1px solid black;
   }

@@ -14,11 +14,14 @@
   let lastY = 0;
   let hue = 0;
   let direction = true;
+  let isMulticolour = false;
 
   function draw(e) {
     if(!isDrawing) return;
     // console.log(e);
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    if(isMulticolour) {
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    }
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -44,7 +47,7 @@
   canvas.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mouseout', () => isDrawing = false);
 
-  const colours = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', '#e34234', '#ffbf00', 'chartreuse', 'teal', 'violet', 'magenta' ];
+  const colours = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', '#e34234', '#ffbf00', 'chartreuse', 'teal', 'violet', 'magenta', 'multicolour'];
 
   var palette = document.getElementById("palette");
   for (var i = 0; i < colours.length; i++) {
@@ -56,10 +59,16 @@
   }
 
   $('.palette-colour').on('click', function() {
+    if($(this).data('colour') === 'multicolour') {
+    isMulticolour = true;     
+  }
+    else {
+      isMulticolour = false;
       ctx.strokeStyle = $(this).data('colour');
+    }
   })
 
-document.getElementsByTagName("body").addEventListener("touchmove", function(e) {e.preventDefault()})
+// document.getElementsByTagName("body").addEventListener("touchmove", function(e) {e.preventDefault()})
 
  canvas.addEventListener("touchstart", function(e) { // = mousedown
     touch = true
