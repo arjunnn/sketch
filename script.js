@@ -48,14 +48,39 @@
   canvas.addEventListener('mouseout', () => isDrawing = false);
 
   const colours = ['black', 'white', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', '#e34234', '#ffbf00', 'chartreuse', 'teal', 'violet', 'magenta', 'multicolour'];
+  const widths = [5, 15, 20, 30, 40];
 
   var palette = document.getElementById("palette");
+  var widthSelector = document.getElementById("widthSelector");
+
   for (var i = 0; i < colours.length; i++) {
       var colourOption = document.createElement("li");
       colourOption.style.backgroundColor = `${colours[i]}`;
       colourOption.classList.add("palette-colour");
       colourOption.setAttribute('data-colour', colours[i])
       palette.appendChild(colourOption);
+  }
+
+  var topl = 40;
+
+  for (var i = 0; i < widths.length; i++) {
+    var widthOption = document.createElement("li");
+    widthOption.classList.add("brush-width");
+    widthOption.classList.add("outer");
+    widthOption.setAttribute('data-width', widths[i]);
+    // widthOption.innerText = widths[i];
+    widthSelector.appendChild(widthOption);
+
+    var div1 = document.createElement("div");
+    div1.classList.add("inner");
+
+    div1.style.top = topl+"%";
+    div1.style.left = topl+"%";
+    div1.style.width = 100 - (2 * topl)+"%";
+    div1.style.height = 100 - (2 * topl)+"%";
+    widthOption.appendChild(div1);
+
+    topl -= 5;   
   }
 
   $('.palette-colour').on('click', function() {
@@ -66,7 +91,11 @@
       isMulticolour = false;
       ctx.strokeStyle = $(this).data('colour');
     }
-  })
+  });
+
+  $(".brush-width").on('click', function() {
+    ctx.lineWidth = $(this).data('width');
+  });
 
 // document.getElementsByTagName("body").addEventListener("touchmove", function(e) {e.preventDefault()})
 

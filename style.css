@@ -5,7 +5,6 @@
   #palette {
         position: relative;
         margin-bottom: 0;
-        /*float: top;*/
         display: inline-block;
   }
   ul > li {
@@ -28,7 +27,25 @@
   }
   canvas {
     border: 1px solid black;
+    cursor: crosshair;
   }
-  ul {
-    /*padding-bottom: 0;*/
+
+  .brush-width {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid black;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .outer {
+    background-color: white;
+    position: relative;
+  }
+
+  .inner {
+    background-color: black;
+    position: relative;
+    border-radius: 50%;
   }
