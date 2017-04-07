@@ -119,19 +119,23 @@ function changePattern(pattern) {
   switch (pattern) {
     case "dot":
       var img = document.getElementById("pattern-dot");
+      fillPattern(img);
       break;
 
     case "grid":
       var img = document.getElementById("pattern-grid");
+      fillPattern(img);
       break;
 
     default:
       break;
   }
-  var pat = pctx.createPattern(img, "repeat");
-  pctx.rect(0, 0, canvas.width, canvas.height);  
-  pctx.fillStyle = pat;
-  pctx.fill();
+  function fillPattern(img) {
+    var pat = pctx.createPattern(img, "repeat");
+    pctx.rect(0, 0, canvas.width, canvas.height);  
+    pctx.fillStyle = pat;
+    pctx.fill();
+  }
 
 // pctx.globalCompositeOperation='source-over';
 }
@@ -141,31 +145,32 @@ function clearCanvas() {
 }
 
 //touch events
-
-
   
   canvas.addEventListener("touchstart", handleStart, false);
   canvas.addEventListener("touchend", handleEnd, false);
   canvas.addEventListener("touchcancel", handleCancel, false);
   canvas.addEventListener("touchmove", handleMove, false);
-  console.log("initialized.");
 
   var ongoingTouches = [];
 
   function handleStart(evt) {
   evt.preventDefault();
-  console.log("touchstart.");
 
   var touches = evt.changedTouches;
         
-  for (var i = 0; i < touches.length; i++) {
-    console.log("touchstart:" + i + "...");
+  for (var i = 0; i < touches.length; i++) {  
+    if(isMulticolour) {
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    }
     ongoingTouches.push(copyTouch(touches[i]));
     ctx.beginPath();
     ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
     // ctx.fillStyle = color;
-    ctx.fill();
-    console.log("touchstart:" + i + ".");
+    ctx.fill();  
+    hue++;
+    if(hue >= 360){
+      hue = 0;
+    }
   }
 }
 
@@ -176,50 +181,52 @@ function handleMove(evt) {
   for (var i = 0; i < touches.length; i++) {
     var idx = ongoingTouchIndexById(touches[i].identifier);
 
-    if (idx >= 0) {
-      console.log("continuing touch "+idx);
-      ctx.beginPath();
-      console.log("ctx.moveTo(" + ongoingTouches[idx].pageX + ", " + ongoingTouches[idx].pageY + ");");
-      ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-      console.log("ctx.lineTo(" + touches[i].pageX + ", " + touches[i].pageY + ");");
+    if(isMulticolour) {
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    }
+
+    if (idx >= 0) {    
+      ctx.beginPath();    
+      ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);    
       ctx.lineTo(touches[i].pageX, touches[i].pageY);
-      ctx.lineWidth = 4;
-      // ctx.strokeStyle = color;
       ctx.stroke();
 
-      ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
-      console.log(".");
-    } else {
-      console.log("can't figure out which touch to continue");
+      ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record    
+    } else {    
+    }
+    hue++;
+    if(hue >= 360){
+      hue = 0;
     }
   }
 }
 
 function handleEnd(evt) {
   evt.preventDefault();
-  console.log("touchend");
   var touches = evt.changedTouches;
 
   for (var i = 0; i < touches.length; i++) {
     var idx = ongoingTouchIndexById(touches[i].identifier);
-
+    if(isMulticolour) {
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    }
     if (idx >= 0) {
-      ctx.lineWidth = 4;
-      // ctx.fillStyle = color;
       ctx.beginPath();
       ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
       ctx.lineTo(touches[i].pageX, touches[i].pageY);
-      ctx.fillRect(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8);  // and a square at the end
+      // ctx.fillRect(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8);  // and a square at the end
       ongoingTouches.splice(idx, 1);  // remove it; we're done
-    } else {
-      console.log("can't figure out which touch to end");
+    } else {    
+    }
+    hue++;
+    if(hue >= 360){
+      hue = 0;
     }
   }
 }
 
 function handleCancel(evt) {
   evt.preventDefault();
-  console.log("touchcancel.");
   var touches = evt.changedTouches;
   
   for (var i = 0; i < touches.length; i++) {
