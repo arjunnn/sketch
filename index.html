@@ -8,8 +8,21 @@
     <body>
         <ul id="palette"></ul>
         <ul id="widthSelector"></ul>
-        <a href="#" download="drawing.png" onclick="saveImage()">Save Drawing</a>
-        <canvas id="draw"></canvas>
+        <ul id="patternSelector">
+            <li onclick="changePattern('dot')" class="pattern pattern-dot"></li>
+            <li onclick="changePattern('grid')" class="pattern pattern-grid"></li>
+            <li onclick="changePattern('none')" class="pattern"></li>
+        </ul>
+        <a href="#" download="drawing.png" onclick="saveImage()" class="action">Download sketch</a>
+        <button href="#"onclick="clearCanvas()" class="action">clear</button>
+        <div style="position: relative;">
+ <canvas id="draw" width="100" height="100" 
+   style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+ <canvas id="pattern" width="100" height="100" 
+   style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+</div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAJUlEQVQoU2NkQAOtra0zq6ur05GFGemsCOQGdCvR+fR2EzFBAAAnfiIyytA0dQAAAABJRU5ErkJggg==" id="pattern-dot" ></img>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAGUlEQVQYV2NkwAEYaSjR2to6E2Q8hh0wCQBUVwRXsJM+IgAAAABJRU5ErkJggg==" id="pattern-grid" ></img>
         <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="script.js" async></script>
