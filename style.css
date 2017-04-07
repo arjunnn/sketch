@@ -1,9 +1,12 @@
   html, body {
     margin:0;
-    background-color: lightcoral;
     /*background-color: #004C3F;*/
   }
-
+  .controls-container {
+    background-color: lightcoral;
+    padding: 5px;
+    width: 100vw;
+  }
   button {
     border: none;
   }
