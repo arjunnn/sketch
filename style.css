@@ -4,8 +4,9 @@
   }
   .controls-container {
     background-color: lightcoral;
-    padding: 5px;
+    padding-bottom: 5px;
     width: 100vw;
+    text-align: center;
   }
   button {
     border: none;
@@ -15,6 +16,9 @@
         position: relative;
         margin-bottom: 0;
         display: inline-block;
+  }
+  ul {
+    padding-left: 30px;
   }
   ul > li {
       display: inline-block;
